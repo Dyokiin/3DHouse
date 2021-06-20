@@ -12,7 +12,7 @@
 #include "../include/assets.hpp"
 
 #define STEP_PROF 0.5
-#define STEP_ANGLE 3.14/6
+#define STEP_ANGLE 3.14/12
 
 
 /* variables globales pour la gestion de la caméra */
@@ -20,48 +20,11 @@ float profondeur;
 float latitude;
 float longitude;
 
-float global_time = 0.0f;
-float global_light = 0.0f;
-bool use_shader = true;
-bool animate_world = false;
-bool animate_light = false;
-GLUquadric *quadric = NULL;
-Vox* tex;
-Vox* mex;
-Vox* rex;
-Vox* sex;
-Object* wallo;
 
-void glDrawRepere(float length) {
-	// dessin du repère
-	glBegin(GL_LINES);
-		glColor3f(1.,0.,0.);
-		glVertex3f(0.,0.,0.);
-		glVertex3f(length,0.,0.);
-		glColor3f(0.,1.,0.);
-		glVertex3i(0.,0.,0.);
-		glVertex3i(0.,length,0.);
-		glColor3f(0.,0.,1.);
-		glVertex3i(0.,0.,0.);
-		glVertex3i(0.,0.,length);
-	glEnd();
-}
+Object* poto;
+Object* dirto;
+Object* planto;
 
-void glDrawLight(float length) {
-	glColor3f(1.,1.,0.);
-	gluSphere(quadric,length,16,16);
-}
-
-
-void showMatrix(float* mat) {
-	std::cerr<<"Matrix "<<std::endl;
-	for(int i =0; i<4; i++ ) {
-		for(int j=0; j<4; j++) {
-			std::cerr<<mat[j*4+i]<<":";
-		}
-		std::cerr<<std::endl;
-	}
-}
 
 /*********************************************************/
 /* fonction de dessin de la scène à l'écran              */
@@ -84,16 +47,11 @@ static void drawFunc(void) {
               0.0,1.0,0.0
 	);
 
-	glColor3f(1.0,0.0,0.0);
-	glDrawRepere(2.0);
-
 	/* Debut du dessin */
 	glBegin(GL_TRIANGLES);
-	tex->Display(0.,0.,0.);
-	mex->Display(0.,0.,0.);
-	rex->Display(0.,0.,0.);
-	sex->Display(0.,0.,0.);
-	wallo->Display(0.,0.,0.);
+	poto->Display(0.,0.,0.);
+	dirto->Display(0.,0.,0.);
+	planto->Display(0.,0.,0.);
 	glEnd();
 	/* Fin du dessin */
 	glPopMatrix();
@@ -142,15 +100,6 @@ static void kbdFunc(unsigned char c, int x, int y) {
 		case 'F' : case 'f' : glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
 			break;
 		case 'P' : case 'p' : glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-			break;
-		case 'A' : case 'a' : 
-			animate_world = !animate_world;
-			break;
-		case 'L' : case 'l' : 
-			animate_light = !animate_light;
-			break;
-		case 'S' : case 's' : 
-			use_shader = !use_shader;
 			break;
 		default:
 			printf("Appui sur la touche %c\n",c);
@@ -201,11 +150,6 @@ void init() {
 	latitude = M_PI/3.0;
 	longitude = -M_PI/4.0;
 
-	global_time = 0.0;
-	global_light = 0.0;
-
-	quadric = gluNewQuadric();
-
 	/* INITIALISATION DES PARAMETRES GL */
 	/* couleur du fond (gris sombre) */
 	glClearColor(0.05,0.05,0.05,0.0);
@@ -213,15 +157,10 @@ void init() {
 	glEnable( GL_DEPTH_TEST);
 	glEnable( GL_NORMALIZE);
 
-	/* lissage des couleurs sur les facettes */
-	glShadeModel(GL_SMOOTH);
-
 	/* INITIALISATION DE LA SCENE */
-	tex = new Vox(1.,1.,1.,1.,0.,0.,0.);
-	mex = new Vox(1.,0.,0.,1.,1.,0.,0.);
-	rex = new Vox(0.,1.,0.,1.,0.,1.,0.);
-	sex = new Vox(0.,0.,1.,1.,0.,0.,1.);
-	wallo = new Object(wall);
+	poto = new Object(pot);
+	dirto = new Object(dirt);
+	planto = new Object(plant);
 
 }
 
