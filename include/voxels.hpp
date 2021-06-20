@@ -17,6 +17,7 @@ typedef struct Triangle {
     point c1;
     point c2;
     point c3;
+    point norm;
 } triangle;
 
 triangle makeTriangle(point c1, point c2, point c3);
@@ -46,7 +47,7 @@ private:
 public:
     Vox(float r, float g, float b, float alpha, float x, float y, float z);
     ~Vox(); 
-    void Display();
+    void Display(float x, float y, float z);
     void setColor(float r, float g, float b);
 };
 
