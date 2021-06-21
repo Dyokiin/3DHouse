@@ -71,7 +71,7 @@ static void reshapeFunc(int width,int height) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	/* définition de la camera */
-	gluPerspective( 60.0, h, 0.01, 100.0 );			// Angle de vue, rapport largeur/hauteur, near, far
+	gluPerspective( 70.0, h, 0.01, 500.0 );			// Angle de vue, rapport largeur/hauteur, near, far
 
 	/* Retour a la pile de matrice Modelview
 			et effacement de celle-ci */
@@ -152,7 +152,7 @@ void init() {
 	glEnable( GL_NORMALIZE);
 
 	/* INITIALISATION DE LA SCENE */
-	initScene(house);
+	house = initScene();
 
 }
 

@@ -1,10 +1,10 @@
 BIN = bin/3DHouse
 FLAGS = -Wall -g
 INC = 
-LIBS = -lglut -lGLU -lGL -lm -lSDL -lSDL_image
+LIBS = -lglut -lGLU -lGL -lm 
 LIBDIR = 
 GCC = g++
-OBJECTS = obj/voxels.o obj/createObjects.o obj/house.o obj/main.o obj/scene.o obj/createScene.o
+OBJECTS = obj/voxels.o obj/createObjects.o obj/plants.o obj/main.o obj/scene.o obj/createScene.o obj/walls.o
 
 default: $(BIN)
 
@@ -19,7 +19,10 @@ obj/voxels.o: src/voxels.cpp include/voxels.hpp
 obj/createObjects.o: src/Scene/createObjects.cpp include/createObjects.hpp
 	$(GCC) $(INC) $(FLAGS) -c $< -o $@
 
-obj/house.o: src/Assets/house.cpp include/assets.hpp
+obj/plants.o: src/Assets/plants.cpp include/assets.hpp
+	$(GCC) $(INC) $(FLAGS) -c $< -o $@
+
+obj/walls.o: src/Assets/walls.cpp include/assets.hpp
 	$(GCC) $(INC) $(FLAGS) -c $< -o $@
 
 obj/scene.o: src/Scene/scene.cpp include/scene.hpp

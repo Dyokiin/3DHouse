@@ -5,6 +5,6 @@
 #include "assets.hpp"
 #include "createObjects.hpp"
 
-void initScene(SceneNode *scene);
+SceneNode* initScene();
 
 #endif

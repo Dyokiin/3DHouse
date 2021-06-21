@@ -13,6 +13,4 @@ public:
     void Display(float x, float y, float z);
 };
 
-std::list<Object*> InitScene();
-
 #endif

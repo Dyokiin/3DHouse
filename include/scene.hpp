@@ -3,14 +3,16 @@
 
 #include "createObjects.hpp"
 
+class ObjectNode;
+
 class SceneNode {
-protected:
+public:
     point localZero;
     std::list<SceneNode*> children;
+    std::list<ObjectNode*> elements;
 public:
     SceneNode();
     SceneNode(point localz);
-    SceneNode(SceneNode* prev);
     void addChild(SceneNode* child);
     void setChild(std::list<SceneNode*> children);
     void setLocal(point localz);
@@ -19,13 +21,13 @@ public:
 };
 
 class ObjectNode : public SceneNode {
-protected:
-    std::list<Object*> assets;
+public:
+    std::list<Object> assets;
 public:
     ObjectNode() : SceneNode(){};
-    ObjectNode(SceneNode* prev) : SceneNode(prev){};
-    void addObject(Object* o);
-    void setObjects(std::list<Object*> objects);
+    ObjectNode(point getLocal);
+    void addObject(Object o);
+    void setObjects(std::list<Object>* objects);
     void update();
 };
 
