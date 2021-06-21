@@ -7,9 +7,7 @@
 #include <GL/glu.h>
 #include <GL/gl.h>
 
-#include "../include/voxels.hpp"
-#include "../include/createObjects.hpp"
-#include "../include/assets.hpp"
+#include "../include/createScene.hpp"
 
 #define STEP_PROF 0.5
 #define STEP_ANGLE 3.14/12
@@ -21,9 +19,7 @@ float latitude;
 float longitude;
 
 
-Object* poto;
-Object* dirto;
-Object* planto;
+SceneNode* house;
 
 
 /*********************************************************/
@@ -49,9 +45,7 @@ static void drawFunc(void) {
 
 	/* Debut du dessin */
 	glBegin(GL_TRIANGLES);
-	poto->Display(0.,0.,0.);
-	dirto->Display(0.,0.,0.);
-	planto->Display(0.,0.,0.);
+	house->update();
 	glEnd();
 	/* Fin du dessin */
 	glPopMatrix();
@@ -152,15 +146,13 @@ void init() {
 
 	/* INITIALISATION DES PARAMETRES GL */
 	/* couleur du fond (gris sombre) */
-	glClearColor(0.05,0.05,0.05,0.0);
+	glClearColor(0.05,0.05,0.1,0.0);
 	/* activation du ZBuffer */
 	glEnable( GL_DEPTH_TEST);
 	glEnable( GL_NORMALIZE);
 
 	/* INITIALISATION DE LA SCENE */
-	poto = new Object(pot);
-	dirto = new Object(dirt);
-	planto = new Object(plant);
+	initScene(house);
 
 }
 
