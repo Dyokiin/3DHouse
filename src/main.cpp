@@ -8,6 +8,7 @@
 #include <GL/gl.h>
 
 #include "../include/createScene.hpp"
+#include "../include/camera.hpp"
 
 #define STEP_PROF 0.5
 #define STEP_ANGLE 3.14/12
@@ -44,8 +45,9 @@ static void drawFunc(void) {
 	);
 
 	/* Debut du dessin */
-	glBegin(GL_TRIANGLES);
-	house->update();
+	glBegin(GL_POINTS);
+	//house->update();
+	cameraSpline();
 	glEnd();
 	/* Fin du dessin */
 	glPopMatrix();
@@ -153,6 +155,8 @@ void init() {
 
 	/* INITIALISATION DE LA SCENE */
 	house = initScene();
+
+	cameraSpline();
 
 }
 
