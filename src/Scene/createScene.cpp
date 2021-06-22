@@ -8,7 +8,7 @@ SceneNode* initScene(){
     /* On construit d'abord tous les objets */
 
 //plante
-    ObjectNode* plante1 = new ObjectNode(makePoint(2.,1.,2.));
+    ObjectNode* plante1 = new ObjectNode(makePoint(2.,20.,2.));
     std::list<Object> lplante = {Object(pot),
                                   Object(dirt),
                                   Object(plant)};

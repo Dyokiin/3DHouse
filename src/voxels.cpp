@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/voxels.hpp"
+#include "../include/camera.hpp"
 
 #define OFF 0.5
 
@@ -88,52 +89,64 @@ Vox::Vox(float r, float g, float b, float alpha, float x, float y, float z){
 Vox::~Vox(){}
 
 void Vox::Display(float x, float y, float z){
-
     glColor4f(this->color.x, this->color.y, this->color.z, this->alpha);
-    glVertex3f(this->f11.c1.x+x,this->f11.c1.y+y,this->f11.c1.z+z);
-    glVertex3f(this->f11.c2.x+x,this->f11.c2.y+y,this->f11.c2.z+z);
-    glVertex3f(this->f11.c3.x+x,this->f11.c3.y+y,this->f11.c3.z+z);
-    glVertex3f(this->f12.c1.x+x,this->f12.c1.y+y,this->f12.c1.z+z);
-    glVertex3f(this->f12.c2.x+x,this->f12.c2.y+y,this->f12.c2.z+z);
-    glVertex3f(this->f12.c3.x+x,this->f12.c3.y+y,this->f12.c3.z+z);
 
-    //glColor4f(this->color.x+x-0.1, this->color.y+y-0.1, this->color.z+z-0.1, this->alpha);
-    glVertex3f(this->f21.c1.x+x,this->f21.c1.y+y,this->f21.c1.z+z);
-    glVertex3f(this->f21.c2.x+x,this->f21.c2.y+y,this->f21.c2.z+z);
-    glVertex3f(this->f21.c3.x+x,this->f21.c3.y+y,this->f21.c3.z+z);
-    glVertex3f(this->f22.c1.x+x,this->f22.c1.y+y,this->f22.c1.z+z);
-    glVertex3f(this->f22.c2.x+x,this->f22.c2.y+y,this->f22.c2.z+z);
-    glVertex3f(this->f22.c3.x+x,this->f22.c3.y+y,this->f22.c3.z+z);
+    if(this->f11.c1.x-(cx+offx)<=0){ //f1* norms are all x positive
+        glVertex3f(this->f11.c1.x+x,this->f11.c1.y+y,this->f11.c1.z+z);
+        glVertex3f(this->f11.c2.x+x,this->f11.c2.y+y,this->f11.c2.z+z);
+        glVertex3f(this->f11.c3.x+x,this->f11.c3.y+y,this->f11.c3.z+z);
+        glVertex3f(this->f12.c1.x+x,this->f12.c1.y+y,this->f12.c1.z+z);
+        glVertex3f(this->f12.c2.x+x,this->f12.c2.y+y,this->f12.c2.z+z);
+        glVertex3f(this->f12.c3.x+x,this->f12.c3.y+y,this->f12.c3.z+z);
+    }
 
-    //glColor4f(this->color.x+x-0.3, this->color.y+y-0.3, this->color.z+z-0.3, this->alpha);
-    glVertex3f(this->f31.c1.x+x,this->f31.c1.y+y,this->f31.c1.z+z);
-    glVertex3f(this->f31.c2.x+x,this->f31.c2.y+y,this->f31.c2.z+z);
-    glVertex3f(this->f31.c3.x+x,this->f31.c3.y+y,this->f31.c3.z+z);
-    glVertex3f(this->f32.c1.x+x,this->f32.c1.y+y,this->f32.c1.z+z);
-    glVertex3f(this->f32.c2.x+x,this->f32.c2.y+y,this->f32.c2.z+z);
-    glVertex3f(this->f32.c3.x+x,this->f32.c3.y+y,this->f32.c3.z+z);
+    if(this->f21.c1.x-(cx+offx)>0){ //f2* norms are all x negative 
+        //glColor4f(this->color.x+x-0.1, this->color.y+y-0.1, this->color.z+z-0.1, this->alpha);
+        glVertex3f(this->f21.c1.x+x,this->f21.c1.y+y,this->f21.c1.z+z);
+        glVertex3f(this->f21.c2.x+x,this->f21.c2.y+y,this->f21.c2.z+z);
+        glVertex3f(this->f21.c3.x+x,this->f21.c3.y+y,this->f21.c3.z+z);
+        glVertex3f(this->f22.c1.x+x,this->f22.c1.y+y,this->f22.c1.z+z);
+        glVertex3f(this->f22.c2.x+x,this->f22.c2.y+y,this->f22.c2.z+z);
+        glVertex3f(this->f22.c3.x+x,this->f22.c3.y+y,this->f22.c3.z+z);
+    }
 
-    //glColor4f(this->color.x+x-0.5, this->color.y+y-0.5, this->color.z+z-0.5, this->alpha);
-    glVertex3f(this->f41.c1.x+x,this->f41.c1.y+y,this->f41.c1.z+z);
-    glVertex3f(this->f41.c2.x+x,this->f41.c2.y+y,this->f41.c2.z+z);
-    glVertex3f(this->f41.c3.x+x,this->f41.c3.y+y,this->f41.c3.z+z);
-    glVertex3f(this->f42.c1.x+x,this->f42.c1.y+y,this->f42.c1.z+z);
-    glVertex3f(this->f42.c2.x+x,this->f42.c2.y+y,this->f42.c2.z+z);
-    glVertex3f(this->f42.c3.x+x,this->f42.c3.y+y,this->f42.c3.z+z);
+    if(this->f31.c1.y-(cy+offy)<=0){
+        //glColor4f(this->color.x+x-0.3, this->color.y+y-0.3, this->color.z+z-0.3, this->alpha);
+        glVertex3f(this->f31.c1.x+x,this->f31.c1.y+y,this->f31.c1.z+z);
+        glVertex3f(this->f31.c2.x+x,this->f31.c2.y+y,this->f31.c2.z+z);
+        glVertex3f(this->f31.c3.x+x,this->f31.c3.y+y,this->f31.c3.z+z);
+        glVertex3f(this->f32.c1.x+x,this->f32.c1.y+y,this->f32.c1.z+z);
+        glVertex3f(this->f32.c2.x+x,this->f32.c2.y+y,this->f32.c2.z+z);
+        glVertex3f(this->f32.c3.x+x,this->f32.c3.y+y,this->f32.c3.z+z);
+    }
 
-    //glColor4f(this->color.x+x-0.6, this->color.y+y-0.6, this->color.z+z-0.6, this->alpha);
-    glVertex3f(this->f51.c1.x+x,this->f51.c1.y+y,this->f51.c1.z+z);
-    glVertex3f(this->f51.c2.x+x,this->f51.c2.y+y,this->f51.c2.z+z);
-    glVertex3f(this->f51.c3.x+x,this->f51.c3.y+y,this->f51.c3.z+z);
-    glVertex3f(this->f52.c1.x+x,this->f52.c1.y+y,this->f52.c1.z+z);
-    glVertex3f(this->f52.c2.x+x,this->f52.c2.y+y,this->f52.c2.z+z);
-    glVertex3f(this->f52.c3.x+x,this->f52.c3.y+y,this->f52.c3.z+z);
+    if(this->f41.c1.y-(cy+offy)>0){
+        //glColor4f(this->color.x+x-0.5, this->color.y+y-0.5, this->color.z+z-0.5, this->alpha);
+        glVertex3f(this->f41.c1.x+x,this->f41.c1.y+y,this->f41.c1.z+z);
+        glVertex3f(this->f41.c2.x+x,this->f41.c2.y+y,this->f41.c2.z+z);
+        glVertex3f(this->f41.c3.x+x,this->f41.c3.y+y,this->f41.c3.z+z);
+        glVertex3f(this->f42.c1.x+x,this->f42.c1.y+y,this->f42.c1.z+z);
+        glVertex3f(this->f42.c2.x+x,this->f42.c2.y+y,this->f42.c2.z+z);
+        glVertex3f(this->f42.c3.x+x,this->f42.c3.y+y,this->f42.c3.z+z);
+    }
 
-    //glColor4f(this->color.x+x-0.8, this->color.y+y-0.8, this->color.z+z-0.8, this->alpha);
-    glVertex3f(this->f61.c1.x+x,this->f61.c1.y+y,this->f61.c1.z+z);
-    glVertex3f(this->f61.c2.x+x,this->f61.c2.y+y,this->f61.c2.z+z);
-    glVertex3f(this->f61.c3.x+x,this->f61.c3.y+y,this->f61.c3.z+z);
-    glVertex3f(this->f62.c1.x+x,this->f62.c1.y+y,this->f62.c1.z+z);
-    glVertex3f(this->f62.c2.x+x,this->f62.c2.y+y,this->f62.c2.z+z);
-    glVertex3f(this->f62.c3.x+x,this->f62.c3.y+y,this->f62.c3.z+z);
+    if(this->f51.c1.z-(cz+offz)<=0){
+        //glColor4f(this->color.x+x-0.6, this->color.y+y-0.6, this->color.z+z-0.6, this->alpha);
+        glVertex3f(this->f51.c1.x+x,this->f51.c1.y+y,this->f51.c1.z+z);
+        glVertex3f(this->f51.c2.x+x,this->f51.c2.y+y,this->f51.c2.z+z);
+        glVertex3f(this->f51.c3.x+x,this->f51.c3.y+y,this->f51.c3.z+z);
+        glVertex3f(this->f52.c1.x+x,this->f52.c1.y+y,this->f52.c1.z+z);
+        glVertex3f(this->f52.c2.x+x,this->f52.c2.y+y,this->f52.c2.z+z);
+        glVertex3f(this->f52.c3.x+x,this->f52.c3.y+y,this->f52.c3.z+z);
+    }
+
+    if(this->f61.c1.z-(cz+offz)>0){
+        //glColor4f(this->color.x+x-0.8, this->color.y+y-0.8, this->color.z+z-0.8, this->alpha);
+        glVertex3f(this->f61.c1.x+x,this->f61.c1.y+y,this->f61.c1.z+z);
+        glVertex3f(this->f61.c2.x+x,this->f61.c2.y+y,this->f61.c2.z+z);
+        glVertex3f(this->f61.c3.x+x,this->f61.c3.y+y,this->f61.c3.z+z);
+        glVertex3f(this->f62.c1.x+x,this->f62.c1.y+y,this->f62.c1.z+z);
+        glVertex3f(this->f62.c2.x+x,this->f62.c2.y+y,this->f62.c2.z+z);
+        glVertex3f(this->f62.c3.x+x,this->f62.c3.y+y,this->f62.c3.z+z);
+    }
 }

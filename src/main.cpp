@@ -7,21 +7,22 @@
 #include <GL/glu.h>
 #include <GL/gl.h>
 
-#include "../include/createScene.hpp"
 #include "../include/camera.hpp"
+#include "../include/createScene.hpp"
+
 
 #define STEP_PROF 0.5
 #define STEP_ANGLE 3.14/12
 
-
-/* variables globales pour la gestion de la caméra */
-float profondeur;
-float latitude;
-float longitude;
-float offx;
-float offz;
-float offy;
-
+float profondeur = 0.2;
+float latitude = 1.8322;
+float longitude = -2.0937;
+float offx = -97;
+float offy = 31;
+float offz = -12;
+float cx;
+float cy;
+float cz;
 
 SceneNode* house;
 
@@ -40,9 +41,12 @@ static void drawFunc(void) {
 	glPushMatrix();
 	
 	/* placement de la caméra */
-	gluLookAt(profondeur*sin(longitude)*sin(latitude) + offx,
-			  profondeur*cos(latitude)				  + offy,
-			  profondeur*cos(longitude)*sin(latitude) + offz,
+	cx = profondeur*sin(longitude)*sin(latitude);
+	cy = profondeur*cos(latitude);
+	cz = profondeur*cos(longitude)*sin(latitude);
+	gluLookAt(cx + offx,
+			  cy + offy,
+			  cz + offz,
               0.0+offx,0.0+offy,0.0+offz,
               0.0,1.0,0.0
 	);
@@ -93,6 +97,9 @@ static void kbdFunc(unsigned char c, int x, int y) {
 			std::cout << "(" << offx << "," << offy << "," << offz << ")" << std::endl;
 			exit(0);
 			break;
+		case 'F' : case 'f' : glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+			break;
+		case 'P' : case 'p' : glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 		case 'Z' : case 'z' : 
 			offx+=5*(-profondeur*sin(longitude)*sin(latitude));
 			offz+=5*(-profondeur*cos(longitude)*sin(latitude));
@@ -133,12 +140,7 @@ static void kbdSpFunc(int c, int x, int y) {
 }
 
 void init() {
-	profondeur = 0.2;
-	latitude = 1.8322;
-	longitude = -2.0937;
-	offx = -97;
-	offy = 31;
-	offz = -12;
+
 
 	/* INITIALISATION DES PARAMETRES GL */
 	/* couleur du fond (gris sombre) */
