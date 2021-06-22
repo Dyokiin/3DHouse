@@ -18,6 +18,9 @@
 float profondeur;
 float latitude;
 float longitude;
+float offx;
+float offz;
+float offy;
 
 
 SceneNode* house;
@@ -37,17 +40,17 @@ static void drawFunc(void) {
 	glPushMatrix();
 	
 	/* placement de la caméra */
-	gluLookAt(profondeur*sin(longitude)*sin(latitude),
-			  profondeur*cos(latitude),
-			  profondeur*cos(longitude)*sin(latitude),
-              0.0,0.0,0.0,
+	gluLookAt(profondeur*sin(longitude)*sin(latitude) + offx,
+			  profondeur*cos(latitude)				  + offy,
+			  profondeur*cos(longitude)*sin(latitude) + offz,
+              0.0+offx,0.0+offy,0.0+offz,
               0.0,1.0,0.0
 	);
 
 	/* Debut du dessin */
-	glBegin(GL_POINTS);
-	//house->update();
-	cameraSpline();
+	glBegin(GL_TRIANGLES);
+	house->update();
+	//cameraSpline();
 	glEnd();
 	/* Fin du dessin */
 	glPopMatrix();
@@ -81,49 +84,43 @@ static void reshapeFunc(int width,int height) {
 	glLoadIdentity();
 }
 
-/*********************************************************/
-/* fonction associée aux interruptions clavier           */
-/* paramètres :                                          */
-/* - c : caractère saisi                                 */
-/* - x,y : coordonnée du curseur dans la fenêtre         */
 static void kbdFunc(unsigned char c, int x, int y) {
-	/* sortie du programme si utilisation des touches ESC, */
-	/* 'q' ou 'Q'*/
 	switch(c) {
 		case 27 :
+			std::cout << "profondeur : " << profondeur << std::endl;
+			std::cout << "longitude : " << longitude << std::endl;
+			std::cout << "latitude : " << latitude << std::endl;
+			std::cout << "(" << offx << "," << offy << "," << offz << ")" << std::endl;
 			exit(0);
 			break;
-		case 'F' : case 'f' : glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+		case 'Z' : case 'z' : 
+			offx+=5*(-profondeur*sin(longitude)*sin(latitude));
+			offz+=5*(-profondeur*cos(longitude)*sin(latitude));
 			break;
-		case 'P' : case 'p' : glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
+		case 'S' : case 's' : 
+			offx-=5*(-profondeur*sin(longitude)*sin(latitude));
+			offz-=5*(-profondeur*cos(longitude)*sin(latitude));
 			break;
-		default:
-			printf("Appui sur la touche %c\n",c);
+		case 32 :
+			offy+=0.5;
 			break;
 	}
 	glutPostRedisplay();
 }
 
-/*********************************************************/
-/* fonction associée aux interruptions clavier pour les  */
-/*          touches spéciales                            */
-/* paramètres :                                          */
-/* - c : code de la touche saisie                        */
-/* - x,y : coordonnée du curseur dans la fenêtre         */
 static void kbdSpFunc(int c, int x, int y) {
-	/* sortie du programme si utilisation des touches ESC, */
 	switch(c) {
 		case GLUT_KEY_UP :
-			if (latitude>STEP_ANGLE) latitude -= STEP_ANGLE;
+			if (latitude>STEP_ANGLE) latitude += STEP_ANGLE;
 			break;
 		case GLUT_KEY_DOWN :
-			if(latitude<M_PI-STEP_ANGLE) latitude += STEP_ANGLE;
+			if(latitude<M_PI-STEP_ANGLE) latitude -= STEP_ANGLE;
 			break;
 		case GLUT_KEY_LEFT :
-			longitude -= STEP_ANGLE;
+			longitude += STEP_ANGLE;
 			break;
 		case GLUT_KEY_RIGHT :
-			longitude += STEP_ANGLE;
+			longitude -= STEP_ANGLE;
 			break;
 		case GLUT_KEY_PAGE_UP :
 			profondeur += STEP_PROF;
@@ -131,31 +128,27 @@ static void kbdSpFunc(int c, int x, int y) {
 		case GLUT_KEY_PAGE_DOWN :
 			if (profondeur>0.1+STEP_PROF) profondeur -= STEP_PROF;
 			break;
-		default:
-			printf("Appui sur une touche spéciale\n");
 	}
 	glutPostRedisplay();
 }
 
-
-/*********************************************************/
-/* fonction d'initialisation des paramètres de rendu et  */
-/* des objets de la scènes.                              */
 void init() {
-	profondeur = 10.0;
-	latitude = M_PI/3.0;
-	longitude = -M_PI/4.0;
+	profondeur = 0.2;
+	latitude = 1.8322;
+	longitude = -2.0937;
+	offx = -97;
+	offy = 31;
+	offz = -12;
 
 	/* INITIALISATION DES PARAMETRES GL */
 	/* couleur du fond (gris sombre) */
-	glClearColor(0.05,0.05,0.1,0.0);
+	glClearColor(0.2,0.2,0.4,0.0);
 	/* activation du ZBuffer */
 	glEnable( GL_DEPTH_TEST);
 	glEnable( GL_NORMALIZE);
 
 	/* INITIALISATION DE LA SCENE */
 	house = initScene();
-
 	cameraSpline();
 
 }
