@@ -12,6 +12,9 @@ extern float wallx[13482][3];
 extern float wallx2[34502][3];
 extern float wallx3[34502][3];
 
+/* Portes */
+extern float doorx[1952][3];
+extern float hdx[16][3];
 
 /* Plantes */
 

@@ -24,8 +24,7 @@ triangle makeTriangle(point c1, point c2, point c3);
 
 class Vox {
 private:
-    point color;
-    float alpha; 
+    point color; 
     //face 1
     triangle f11;
     triangle f12;
@@ -45,7 +44,7 @@ private:
     triangle f61;
     triangle f62;
 public:
-    Vox(float r, float g, float b, float alpha, float x, float y, float z);
+    Vox(float r, float g, float b, float x, float y, float z);
     ~Vox(); 
     void Display(float x, float y, float z);
     void setColor(float r, float g, float b);
