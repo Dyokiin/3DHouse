@@ -16,7 +16,7 @@ SceneNode* initScene(){
 
 //murs
     ObjectNode* wall = new ObjectNode(makePoint(0.,0.,0.));
-    std::list<Object> lwall = {Object(wallz), Object(wallz2), Object(wallz3), Object(wallx), Object(wallx2), Object(wallx3)};
+    std::list<Object> lwall = {Object(wallz), Object(wallz2), Object(wallz3), Object(wallx2), Object(wallx3)};
     wall->setObjects(&lwall);
 
 //portes
