@@ -90,7 +90,7 @@ Vox::~Vox(){}
 void Vox::Display(float x, float y, float z){
     glColor3f(this->color.x, this->color.y, this->color.z);
 
-    if(this->f11.c1.x+x-(cx+offx)<=0){ //f1* norms are all x positive
+    if(this->f11.c1.x+x-(cx+offx)<=0){ //f1* norms are all x positive, the face is drown if only toward camera
         glVertex3f(this->f11.c1.x+x,this->f11.c1.y+y,this->f11.c1.z+z);
         glVertex3f(this->f11.c2.x+x,this->f11.c2.y+y,this->f11.c2.z+z);
         glVertex3f(this->f11.c3.x+x,this->f11.c3.y+y,this->f11.c3.z+z);

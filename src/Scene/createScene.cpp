@@ -2,10 +2,17 @@
 #include "../../include/assets.hpp"
 
 SceneNode* initScene(){
+
     /* Scène Principale */
     SceneNode* scene = new SceneNode(makePoint(0.,0.,0.));
 
-    /* On construit d'abord tous les objets */
+    /* Scènes Secondaires */
+    SceneNode* cuisine  = new SceneNode(makePoint(110.,0.,35.));
+    SceneNode* sdb = new SceneNode(makePoint(161.,0.,-30.));
+    SceneNode* chambre = new SceneNode(makePoint(161.,69.,-30.));
+
+
+    /* On construit d'abord tous les objets de la scene principale */
 
 //plantes
     ObjectNode* plante1 = new ObjectNode(makePoint(20.,20.,20.));
@@ -20,18 +27,50 @@ SceneNode* initScene(){
     std::list<Object> lwall = {Object(wallz), Object(wallz2), Object(wallz3), Object(wallx2), Object(wallx3)};
     wall->setObjects(&lwall);
 
+//sols
+    ObjectNode* floorsS = new ObjectNode(makePoint(0.,0.,0.));
+    std::list<Object> lfloor = {Object(floor1)};
+    floorsS->setObjects(&lfloor);
+
 //portes
-        ObjectNode* door = new ObjectNode(makePoint(0.,0.,-29.));
-        std::list<Object> ldoor = {Object(doorx), Object(hdx)};
-        door->setObjects(&ldoor);
-        ObjectNode* door2 = new ObjectNode(makePoint(130.,0.,5));
-        ldoor = {Object(doorx2), Object(hdx2)};
-        door2->setObjects(&ldoor);
+    ObjectNode* door = new ObjectNode(makePoint(0.,0.,-29.));
+    std::list<Object> ldoor = {Object(doorx), Object(hdx)};
+    door->setObjects(&ldoor);
+    ObjectNode* door2 = new ObjectNode(makePoint(130.,0.,5));
+    ldoor = {Object(doorx2), Object(hdx2)};
+    door2->setObjects(&ldoor);
 
-    /* On définit les scènes secondaire et on fait les affectations */
+//toit
+    ObjectNode* roof1 = new ObjectNode(makePoint(-20.,124,-30));
+    std::list<Object> lroof = {Object(roof)};
+    roof1->setObjects(&lroof);
+    ObjectNode* roof2 = new ObjectNode(makePoint(120.,125,-30));
+    roof2->setObjects(&lroof);
 
 
-    std::list<ObjectNode*> l = {door, door2, wall, plante1, plante2};
-    scene->elements = l;
+    /* Construction des objets des scènes secondaire */
+
+    ObjectNode* floorsSDBCH = new ObjectNode(makePoint(0.,0.,0.));
+    lfloor = {Object(floorsc)};
+    floorsSDBCH->setObjects(&lfloor);
+    ObjectNode* floorsC = new ObjectNode(makePoint(0.,0.,0.));
+    lfloor = { Object(floor12),Object(floor11)};
+    floorsC->setObjects(&lfloor);
+
+
+    /* Construiction de la scène et affectation des Objets */
+
+    std::list<ObjectNode*> loc = {floorsC};
+    cuisine->elements = loc; 
+    std::list<ObjectNode*> los = {floorsSDBCH};
+    sdb->elements = los;
+    std::list<ObjectNode*> loch = {floorsSDBCH};
+    chambre->elements = loch;
+    std::list<ObjectNode*> lo = {door, door2, wall, plante1, plante2, floorsS, roof1, roof2};
+    scene->elements = lo;
+
+    std::list<SceneNode*> ls = {cuisine, sdb, chambre};
+    scene->children = ls;
+
     return scene;
 }

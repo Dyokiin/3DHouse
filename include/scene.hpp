@@ -17,7 +17,7 @@ public:
     void setChild(std::list<SceneNode*> children);
     void setLocal(point localz);
     point getLocal();
-    void update();
+    void update(point loc);
 };
 
 class ObjectNode : public SceneNode {
@@ -28,7 +28,7 @@ public:
     ObjectNode(point getLocal);
     void addObject(Object o);
     void setObjects(std::list<Object>* objects);
-    void update();
+    void update(point loc);
 };
 
 

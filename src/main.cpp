@@ -25,6 +25,7 @@ float cy;
 float cz;
 
 SceneNode* house;
+point zero = makePoint(0.,0.,0.);
 
 
 /*********************************************************/
@@ -53,7 +54,7 @@ static void drawFunc(void) {
 
 	/* Debut du dessin */
 	glBegin(GL_TRIANGLES);
-	house->update();
+	house->update(zero);
 	//cameraSpline();
 	glEnd();
 	/* Fin du dessin */

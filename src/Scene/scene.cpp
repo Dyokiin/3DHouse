@@ -28,12 +28,12 @@ point SceneNode::getLocal(){
     return this->localZero;
 }
 
-void SceneNode::update(){
+void SceneNode::update(point local){
     for(SceneNode* x : this->children){
-        x->update();
+        x->update(this->localZero);
     }
     for(ObjectNode* y: this->elements){
-        y->update();
+        y->update(this->localZero);
     }
 
 }
@@ -51,12 +51,15 @@ void ObjectNode::setObjects(std::list<Object>* children){
     this->assets = *children;
 }
 
-void ObjectNode::update(){
+void ObjectNode::update(point local){
     point z = this->getLocal();
+    z.x += local.x;
+    z.y += local.y;
+    z.z += local.z;
     for(Object x : this->assets){
         x.Display(z.x,z.y,z.z);
     }
     for(SceneNode* y : this->children){
-        y->update();
+        y->update(this->localZero);
     }
 }
