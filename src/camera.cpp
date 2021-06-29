@@ -1,22 +1,24 @@
-#include <GL/glew.h>
-#include <GL/glut.h>
-#include <GL/glu.h>
-#include <GL/gl.h>
+#include "../include/camera.hpp"
 
-#include <iostream>
-
-#include "../include/spline.h"
-
-void cameraSpline(){
-    std::vector<double> X, Y;
-    X = {0,10, 15};
-    Y = {0,14,2};
-    tk::spline s(X,Y);			// X needs to be strictly increasing
-    // double value=s(1.3);		// interpolated value at 1.3
-    // double deriv=s.deriv(1,1.3);	// 1st order derivative at 1.3
-    std::vector<double> solutions = s.solve(2.5);	// solves s(x)=0.0
-    for(double x=0; x<3; x+=0.01){
-        glVertex3f(x, 4., s.solve(x)[0]);
-    }
-    
+KeyPoints::KeyPoints(){
+    this->kp = {makePoint(-97,31,-16),
+                makePoint(0,40,-15),
+                makePoint(180,45,10),
+                makePoint(60,50,35),
+                makePoint(100,65,100),
+                makePoint(190,100,130)
+                };
 }
+
+void KeyPoints::step(float x, float y, float z){
+    for(point p : this->kp){
+        if(z <= p.z){
+            offz+=0.5;
+            offx+=p.x-x;
+            offy+=p.y-y;
+            std::cout << offz << std::endl << z << ", " << p.z << std::endl;;
+            break;
+        }
+    }
+}
+

@@ -14,18 +14,19 @@
 #define STEP_PROF 0.5
 #define STEP_ANGLE 3.14/12
 
-float profondeur = 0.2;
+float profondeur = 0.1;
 float latitude = 1.8322;
 float longitude = -2.0937;
 float offx = -97;
 float offy = 31;
-float offz = -12;
+float offz = -17;
 float cx;
 float cy;
 float cz;
 
 SceneNode* house;
 point zero = makePoint(0.,0.,0.);
+KeyPoints* cam = new KeyPoints();
 
 
 /*********************************************************/
@@ -55,7 +56,6 @@ static void drawFunc(void) {
 	/* Debut du dessin */
 	glBegin(GL_TRIANGLES);
 	house->update(zero);
-	//cameraSpline();
 	glEnd();
 	/* Fin du dessin */
 	glPopMatrix();
@@ -67,11 +67,6 @@ static void drawFunc(void) {
 	glutSwapBuffers();
 }
 
-/*********************************************************/
-/* fonction de changement de dimension de la fenetre     */
-/* paramètres :                                          */
-/* - width : largeur (x) de la zone de visualisation     */
-/* - height : hauteur (y) de la zone de visualisation    */
 static void reshapeFunc(int width,int height) {
 	GLfloat  h = (GLfloat) width / (GLfloat) height ;
 	
@@ -87,6 +82,11 @@ static void reshapeFunc(int width,int height) {
 			et effacement de celle-ci */
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+
+void idle(void) {
+	cam->step(cx+offx, cy+offy, cz+offz);
+	glutPostRedisplay();
 }
 
 static void kbdFunc(unsigned char c, int x, int y) {
@@ -111,6 +111,7 @@ static void kbdFunc(unsigned char c, int x, int y) {
 			break;
 		case 32 :
 			offy+=0.5;
+			glutIdleFunc(idle);
 			break;
 	}
 	glutPostRedisplay();
@@ -130,30 +131,22 @@ static void kbdSpFunc(int c, int x, int y) {
 		case GLUT_KEY_RIGHT :
 			longitude -= STEP_ANGLE;
 			break;
-		case GLUT_KEY_PAGE_UP :
-			profondeur += STEP_PROF;
-			break;
-		case GLUT_KEY_PAGE_DOWN :
-			if (profondeur>0.1+STEP_PROF) profondeur -= STEP_PROF;
-			break;
 	}
 	glutPostRedisplay();
 }
 
-void init() {
 
+void init() {
 
 	/* INITIALISATION DES PARAMETRES GL */
 	/* couleur du fond (gris sombre) */
 	glClearColor(0.2,0.2,0.4,0.0);
 	/* activation du ZBuffer */
-	glEnable( GL_DEPTH_TEST);
-	glEnable( GL_NORMALIZE);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_NORMALIZE);
 
 	/* INITIALISATION DE LA SCENE */
 	house = initScene();
-	cameraSpline();
-
 }
 
 int main(int argc, char** argv) {
@@ -179,6 +172,8 @@ int main(int argc, char** argv) {
 	glutKeyboardFunc(kbdFunc);
 	/* association de la fonction callback d'événement du clavier (touches spéciales) */
 	glutSpecialFunc(kbdSpFunc);
+
+	glutIdleFunc(idle);
 
 	/* boucle principale de gestion des événements */
 	glutMainLoop();

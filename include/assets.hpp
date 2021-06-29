@@ -32,4 +32,7 @@ extern float plant1[8][3];
 extern float plant2[100][3];
 extern float flower[20][3];
 
+/* Meubles Salon */
+extern float stool[][3];
+
 #endif

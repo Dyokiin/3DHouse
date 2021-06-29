@@ -18,9 +18,12 @@ SceneNode* initScene(){
     ObjectNode* plante1 = new ObjectNode(makePoint(20.,20.,20.));
     std::list<Object> lplante = {Object(pot), Object(dirt), Object(plant1)};
     plante1->setObjects(&lplante);
-    ObjectNode* plante2 = new ObjectNode(makePoint(145.,1.,-15.));
+    ObjectNode* plante2 = new ObjectNode(makePoint(145.,15.,-15.));
     lplante = {Object(pot), Object(dirt), Object(plant2), Object(flower)};
     plante2->setObjects(&lplante);
+    ObjectNode* stool1 = new ObjectNode(makePoint(145,0,-15));
+    lplante = {Object(stool)};
+    stool1->setObjects(&lplante);
 
 //murs
     ObjectNode* wall = new ObjectNode(makePoint(0.,0.,0.));
@@ -66,7 +69,7 @@ SceneNode* initScene(){
     sdb->elements = los;
     std::list<ObjectNode*> loch = {floorsSDBCH};
     chambre->elements = loch;
-    std::list<ObjectNode*> lo = {door, door2, wall, plante1, plante2, floorsS, roof1, roof2};
+    std::list<ObjectNode*> lo = {door, door2, wall, plante1, plante2, floorsS, roof1, roof2, stool1};
     scene->elements = lo;
 
     std::list<SceneNode*> ls = {cuisine, sdb, chambre};

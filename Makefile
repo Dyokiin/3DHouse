@@ -4,7 +4,7 @@ INC =
 LIBS = -lglut -lGLU -lGL -lm 
 LIBDIR = 
 GCC = g++
-OBJECTS = obj/voxels.o obj/createObjects.o obj/plants.o obj/main.o obj/scene.o obj/createScene.o obj/walls.o obj/camera.o obj/door.o obj/floor.o
+OBJECTS = obj/voxels.o obj/createObjects.o obj/plants.o obj/main.o obj/scene.o obj/createScene.o obj/walls.o obj/camera.o obj/door.o obj/floor.o obj/furnitureS.o
 
 default: $(BIN)
 
@@ -31,13 +31,16 @@ obj/door.o: src/Assets/door.cpp include/assets.hpp
 obj/floor.o: src/Assets/floor.cpp include/assets.hpp
 	$(GCC) $(INC) $(FLAGS) -c $< -o $@
 
+obj/furnitureS.o: src/Assets/furnitureS.cpp include/assets.hpp
+	$(GCC) $(INC) $(FLAGS) -c $< -o $@
+
 obj/scene.o: src/Scene/scene.cpp include/scene.hpp
 	$(GCC) $(INC) $(FLAGS) -c $< -o $@
 
 obj/createScene.o: src/Scene/createScene.cpp include/createScene.hpp
 	$(GCC) $(INC) $(FLAGS) -c $< -o $@
 
-obj/camera.o: src/camera.cpp include/camera.hpp include/spline.h
+obj/camera.o: src/camera.cpp include/camera.hpp
 	$(GCC) $(INC) $(FLAGS) -c $< -o $@
 
 obj/main.o: src/main.cpp
