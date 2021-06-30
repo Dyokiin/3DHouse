@@ -35,4 +35,8 @@ extern float flower[20][3];
 /* Meubles Salon */
 extern float stool[][3];
 
+/* Meubles Cuisine*/
+extern float board[2002][3];
+extern float furns[2177][3];
+
 #endif

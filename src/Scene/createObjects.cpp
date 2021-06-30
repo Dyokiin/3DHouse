@@ -1,6 +1,7 @@
 #include "../../include/createObjects.hpp"
 
 
+/* HEAVY memory use :/ */
 Object::Object(float voxels[][3]){
     int i = 1;
     while(voxels[i][1]!=-1){

@@ -4,7 +4,7 @@ INC =
 LIBS = -lglut -lGLU -lGL -lm 
 LIBDIR = 
 GCC = g++
-OBJECTS = obj/voxels.o obj/createObjects.o obj/plants.o obj/main.o obj/scene.o obj/createScene.o obj/walls.o obj/camera.o obj/door.o obj/floor.o obj/furnitureS.o
+OBJECTS = obj/voxels.o obj/createObjects.o obj/plants.o obj/main.o obj/scene.o obj/createScene.o obj/walls.o obj/camera.o obj/door.o obj/floor.o obj/furnitureS.o obj/furnitureC.o
 
 default: $(BIN)
 
@@ -32,6 +32,9 @@ obj/floor.o: src/Assets/floor.cpp include/assets.hpp
 	$(GCC) $(INC) $(FLAGS) -c $< -o $@
 
 obj/furnitureS.o: src/Assets/furnitureS.cpp include/assets.hpp
+	$(GCC) $(INC) $(FLAGS) -c $< -o $@
+
+obj/furnitureC.o: src/Assets/furnitureC.cpp include/assets.hpp
 	$(GCC) $(INC) $(FLAGS) -c $< -o $@
 
 obj/scene.o: src/Scene/scene.cpp include/scene.hpp

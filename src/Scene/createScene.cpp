@@ -60,10 +60,14 @@ SceneNode* initScene(){
     lfloor = { Object(floor12),Object(floor11)};
     floorsC->setObjects(&lfloor);
 
+    ObjectNode* Fkitch = new ObjectNode(makePoint(25,0.,10));
+    std::list<Object> lkitch = {Object(board), Object(furns)};
+    Fkitch->setObjects(&lkitch);
+
 
     /* Construiction de la scène et affectation des Objets */
 
-    std::list<ObjectNode*> loc = {floorsC};
+    std::list<ObjectNode*> loc = {floorsC, Fkitch};
     cuisine->elements = loc; 
     std::list<ObjectNode*> los = {floorsSDBCH};
     sdb->elements = los;

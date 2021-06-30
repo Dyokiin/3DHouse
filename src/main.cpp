@@ -135,17 +135,12 @@ static void kbdSpFunc(int c, int x, int y) {
 	glutPostRedisplay();
 }
 
-
 void init() {
-
-	/* INITIALISATION DES PARAMETRES GL */
-	/* couleur du fond (gris sombre) */
 	glClearColor(0.2,0.2,0.4,0.0);
-	/* activation du ZBuffer */
+
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_NORMALIZE);
 
-	/* INITIALISATION DE LA SCENE */
 	house = initScene();
 }
 
@@ -173,10 +168,7 @@ int main(int argc, char** argv) {
 	/* association de la fonction callback d'événement du clavier (touches spéciales) */
 	glutSpecialFunc(kbdSpFunc);
 
-	glutIdleFunc(idle);
-
-	/* boucle principale de gestion des événements */
+	//glutIdleFunc(idle);
 	glutMainLoop();
-	/* Cette partie du code n'est jamais atteinte */
 	return 0;
 }
