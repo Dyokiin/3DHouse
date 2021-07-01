@@ -15,7 +15,7 @@ SceneNode* initScene(){
     /* On construit d'abord tous les objets de la scene principale */
 
 //plantes
-    ObjectNode* plante1 = new ObjectNode(makePoint(20.,20.,20.));
+    ObjectNode* plante1 = new ObjectNode(makePoint(2.,62.,15.));
     std::list<Object> lplante = {Object(pot), Object(dirt), Object(plant1)};
     plante1->setObjects(&lplante);
     ObjectNode* plante2 = new ObjectNode(makePoint(145.,15.,-15.));
@@ -27,8 +27,14 @@ SceneNode* initScene(){
 
 //murs
     ObjectNode* wall = new ObjectNode(makePoint(0.,0.,0.));
-    std::list<Object> lwall = {Object(wallz), Object(wallz2), Object(wallz3), Object(wallx2), Object(wallx3)};
+    std::list<Object> lwall = {Object(wallz), Object(wallz2), Object(wallz3)};
     wall->setObjects(&lwall);
+    ObjectNode* wall1 = new ObjectNode(makePoint(0.,0.,0.));
+    lwall = {Object(wallx2)};
+    wall1->setObjects(&lwall);
+    ObjectNode* wall2 = new ObjectNode(makePoint(0.,0.,180.));
+    wall2->setObjects(&lwall); //reduce RAM usage
+
 
 //sols
     ObjectNode* floorsS = new ObjectNode(makePoint(0.,0.,0.));
@@ -48,7 +54,33 @@ SceneNode* initScene(){
     std::list<Object> lroof = {Object(roof)};
     roof1->setObjects(&lroof);
     ObjectNode* roof2 = new ObjectNode(makePoint(120.,125,-30));
-    roof2->setObjects(&lroof);
+    roof2->setObjects(&lroof); //reduce RAM usage
+
+//Objet complexe : étagère, Opti RAM usage
+    SceneNode* etagere = new SceneNode(makePoint(1.,1.,10.));
+    std::list<Object> letag = {Object(etagS)};
+    ObjectNode* etag1 = new ObjectNode(makePoint(0.,0.,0.));
+    etag1->setObjects(&letag);
+    letag = {Object(etagC)};
+    ObjectNode* etag2 = new ObjectNode(makePoint(0.,10,0.));
+    etag2->setObjects(&letag);
+    ObjectNode* etag3 = new ObjectNode(makePoint(0.,20,0.));
+    etag3->setObjects(&letag);
+    ObjectNode* etag4 = new ObjectNode(makePoint(0.,30,0.));
+    etag4->setObjects(&letag);
+    ObjectNode* etag5 = new ObjectNode(makePoint(0.,40,0.));
+    etag5->setObjects(&letag);
+    ObjectNode* etag6 = new ObjectNode(makePoint(0.,50,0.));
+    etag6->setObjects(&letag);
+    ObjectNode* etag7 = new ObjectNode(makePoint(0.,60,0.));
+    etag7->setObjects(&letag);
+    letag = {Object(etagS)};
+    ObjectNode* etag8 = new ObjectNode(makePoint(0.,0.,40.));
+    etag8->setObjects(&letag);
+
+    std::list<ObjectNode*> loetag = {etag1,etag2,etag3,etag4,etag5,etag6,etag7,etag8};
+    etagere->elements = loetag;
+
 
 
     /* Construction des objets des scènes secondaire */
@@ -61,7 +93,7 @@ SceneNode* initScene(){
     floorsC->setObjects(&lfloor);
 
     ObjectNode* Fkitch = new ObjectNode(makePoint(25,0.,10));
-    std::list<Object> lkitch = {Object(board), Object(furns)};
+    std::list<Object> lkitch = {Object(board), Object(furns), Object(hndls), Object(frigo)};
     Fkitch->setObjects(&lkitch);
 
 
@@ -73,10 +105,10 @@ SceneNode* initScene(){
     sdb->elements = los;
     std::list<ObjectNode*> loch = {floorsSDBCH};
     chambre->elements = loch;
-    std::list<ObjectNode*> lo = {door, door2, wall, plante1, plante2, floorsS, roof1, roof2, stool1};
+    std::list<ObjectNode*> lo = {door, door2, wall, wall1, wall2, plante1, plante2, floorsS, roof1, roof2, stool1};
     scene->elements = lo;
 
-    std::list<SceneNode*> ls = {cuisine, sdb, chambre};
+    std::list<SceneNode*> ls = {cuisine, sdb, chambre, etagere};
     scene->children = ls;
 
     return scene;

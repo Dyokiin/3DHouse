@@ -9,7 +9,6 @@ extern float wallz[15900][3];
 extern float wallz2[22877][3];
 extern float wallz3[12532][3];
 extern float wallx2[22511][3];
-extern float wallx3[34502][3];
 
 /* Sols */
 extern float floor1[22878][3];
@@ -34,9 +33,13 @@ extern float flower[20][3];
 
 /* Meubles Salon */
 extern float stool[][3];
+extern float etagC[197][3];
+extern float etagS[352][3];
 
 /* Meubles Cuisine*/
 extern float board[2002][3];
 extern float furns[2177][3];
+extern float hndls[28][3];
+extern float frigo[1252][3];
 
 #endif
