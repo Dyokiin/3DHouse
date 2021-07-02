@@ -35,6 +35,7 @@ extern float flower[20][3];
 extern float stool[][3];
 extern float etagC[197][3];
 extern float etagS[352][3];
+extern float step[220][3];
 
 /* Meubles Cuisine*/
 extern float board[2002][3];

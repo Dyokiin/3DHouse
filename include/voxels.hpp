@@ -1,10 +1,6 @@
 #ifndef VOXELS_HPP
 #define VOXELS_HPP
 
-#include <GL/glut.h>
-#include <GL/glu.h>
-#include <GL/gl.h>
-
 typedef struct Point {
     float x;
     float y;
@@ -12,18 +8,25 @@ typedef struct Point {
 } point;
 
 point makePoint(float x, float y, float z);
+point multPoint(point p1, point p2);
 
 typedef struct Triangle {
     point c1;
     point c2;
     point c3;
-    point norm;
 } triangle;
 
 triangle makeTriangle(point c1, point c2, point c3);
 
+typedef struct Ligth{
+    point Pd;
+    point pos;
+} light;
+
+light* makeLight(point p, point pos);
+
 class Vox {
-private:
+public:
     point color; 
     //face 1
     triangle f11;
