@@ -128,13 +128,24 @@ SceneNode* initScene(){
     Fkitch->setObjects(&lkitch);
 
 
+//Douche
+    ObjectNode* shower = new ObjectNode(makePoint(29,1,140));
+    std::list<Object> lshow = {Object(bac, Lsdb), Object(bord, Lsdb), Object(barre, Lsdb), Object(pommeau, Lsdb), Object(mitig, Lsdb)};
+    shower->setObjects(&lshow);
+
+//chambre 
+    ObjectNode* stick = new ObjectNode(makePoint(0,0,0));
+    std::list<Object> lstick = {Object(ramb, Lsal), Object(bed, Lsal)};
+    stick->setObjects(&lstick);
+
+
     /* Construiction de la scène et affectation des Objets */
 
     std::list<ObjectNode*> loc = {floorsC, Fkitch};
     cuisine->elements = loc; 
-    std::list<ObjectNode*> los = {floorsSDBCH};
+    std::list<ObjectNode*> los = {floorsSDBCH, shower};
     sdb->elements = los;
-    std::list<ObjectNode*> loch = {floorsSDBCH};
+    std::list<ObjectNode*> loch = {floorsSDBCH, stick};
     chambre->elements = loch;
     std::list<ObjectNode*> lo = {door, door2, wall, wall1, wall2, plante1, plante2, floorsS, roof1, roof2, stool1};
     scene->elements = lo;

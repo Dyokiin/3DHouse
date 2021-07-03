@@ -1,9 +1,6 @@
 #ifndef ASSETS_HPP
 #define ASSETS_HPP
 
-#include <list>
-#include "createObjects.hpp"
-
 /* Murs et fenêtres */
 extern float wallz[15900][3];
 extern float wallz2[22877][3];
@@ -37,10 +34,21 @@ extern float etagC[197][3];
 extern float etagS[352][3];
 extern float step[220][3];
 
-/* Meubles Cuisine*/
+/* Meubles Cuisine */
 extern float board[2002][3];
 extern float furns[2177][3];
 extern float hndls[28][3];
 extern float frigo[1252][3];
+
+/* Meubles Salle de Bain */
+extern float bac[1523][3];
+extern float bord[402][3];
+extern float barre[82][3];
+extern float mitig[9][3];
+extern float pommeau[56][3];
+
+/* Meuble Chambre */
+extern float ramb[457][3];
+extern float bed[5305][3];
 
 #endif
