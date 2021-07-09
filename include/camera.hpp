@@ -6,15 +6,12 @@
 #include <GL/glu.h>
 #include <GL/gl.h>
 
-
-#include <iostream>
 #include <list>
 
 #include "voxels.hpp"
 
-extern float profondeur;
-extern float latitude;
-extern float longitude;
+extern float phi;
+extern float teta;
 extern float offx;
 extern float offz;
 extern float offy;

@@ -16,10 +16,10 @@ void KeyPoints::step(float x, float y, float z){
             offz+=(p.z-z)/100 +0.01;
             offx+=(p.x-x)/100 +0.03;
             offy+=(p.y-y)/100;
-            if(x<0){latitude+=3.1415/1000;}
-            if(z<45){latitude -= 3.1415/1900;}
+            if(x<0){phi+=3.1415/1000;}
+            if(z<45){phi -= 3.1415/1900;}
             if(x>0 && p.z - z <= 10){
-                longitude+=3.1415/142;
+                teta+=3.1415/142;
             }
             break;
         }
