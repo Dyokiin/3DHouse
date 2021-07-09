@@ -33,13 +33,6 @@ triangle makeTriangle(point p1, point p2, point p3){
     return* t;
 }
 
-light* makeLight(point p, point pos){
-    light* l = (light*)malloc(6*sizeof(float));
-    l->Pd = p;
-    l->pos= pos;
-    return l;
-}
-
 Vox::Vox(float r, float g, float b, float x, float y, float z){
     this->color = makePoint(r, g, b);
 //face 1

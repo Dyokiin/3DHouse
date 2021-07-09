@@ -7,6 +7,10 @@ extern float wallz2[22877][3];
 extern float wallz3[12532][3];
 extern float wallx2[22511][3];
 
+extern float windowx[468][3];
+extern float windowz1[410][3];
+extern float windowz2[136][3];
+
 /* Sols */
 extern float floor1[22878][3];
 extern float floor11[5586][3];
@@ -33,6 +37,7 @@ extern float stool[][3];
 extern float etagC[197][3];
 extern float etagS[352][3];
 extern float step[220][3];
+extern float table[1322][3];
 
 /* Meubles Cuisine */
 extern float board[2002][3];
@@ -50,5 +55,7 @@ extern float pommeau[56][3];
 /* Meuble Chambre */
 extern float ramb[457][3];
 extern float bed[5305][3];
+extern float lap1[][3];
+extern float lap2[30][3];
 
 #endif

@@ -11,9 +11,8 @@
 class Object {
 private:
     std::list<Vox> voxels;
-    light* l;
 public:
-    Object(float voxlist[][3], light *l);
+    Object(float voxlist[][3]);
     Object(std::list<Vox> voxels);
     void Display(float x, float y, float z);
 };

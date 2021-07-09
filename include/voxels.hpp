@@ -18,13 +18,6 @@ typedef struct Triangle {
 
 triangle makeTriangle(point c1, point c2, point c3);
 
-typedef struct Ligth{
-    point Pd;
-    point pos;
-} light;
-
-light* makeLight(point p, point pos);
-
 class Vox {
 public:
     point color; 
