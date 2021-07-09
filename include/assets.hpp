@@ -58,4 +58,6 @@ extern float bed[5305][3];
 extern float lap1[][3];
 extern float lap2[30][3];
 
+//Total : ~= 162500 cubes 
+
 #endif
